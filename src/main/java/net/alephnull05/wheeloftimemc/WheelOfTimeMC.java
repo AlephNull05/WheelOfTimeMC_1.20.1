@@ -1,6 +1,8 @@
 package net.alephnull05.wheeloftimemc;
 
 import com.mojang.logging.LogUtils;
+import net.alephnull05.wheeloftimemc.item.ModItems;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -27,6 +29,8 @@ public class WheelOfTimeMC
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        ModItems.register(modEventBus);
+
         modEventBus.addListener(this::commonSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
@@ -41,6 +45,9 @@ public class WheelOfTimeMC
 
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
+            if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+                event.accept(ModItems.BRONZE);
+            }
     }
 
     @SubscribeEvent
