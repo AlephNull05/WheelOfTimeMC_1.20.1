@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "wheeloftimemc:item/bronze"
+    "layer0": "wheeloftimemc:item/raw_tin"
   }
 }

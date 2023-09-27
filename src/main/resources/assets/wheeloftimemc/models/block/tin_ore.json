@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "wheeloftimemc:block/bronze_ore"
+    "all": "wheeloftimemc:block/tin_ore"
   }
 }

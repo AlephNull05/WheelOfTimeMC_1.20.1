@@ -20,10 +20,12 @@ public class ModCreativeModeTabs {
                     .title(Component.translatable("creativetab.wheel_of_time_materials"))
                     .displayItems((pParameters, pOutput) -> {
                         pOutput.accept(ModItems.CUENDILLAR_SHARD.get());
-                        pOutput.accept(ModItems.BRONZE.get());
+                        pOutput.accept(ModItems.TIN_INGOT.get());
+                        pOutput.accept(ModItems.RAW_TIN.get());
 
                         pOutput.accept(ModBlocks.CUENDILLAR_BLOCK.get());
-                        pOutput.accept(ModBlocks.BRONZE_ORE.get());
+                        pOutput.accept(ModBlocks.TIN_ORE.get());
+                        pOutput.accept(ModBlocks.TIN_BLOCK.get());
                     })
                     .build());
     public static void register(IEventBus eventBus) {

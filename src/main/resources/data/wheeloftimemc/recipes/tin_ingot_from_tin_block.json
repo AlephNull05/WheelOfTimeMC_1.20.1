@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "wheeloftimemc:tin_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "wheeloftimemc:tin_ingot"
+  }
+}
