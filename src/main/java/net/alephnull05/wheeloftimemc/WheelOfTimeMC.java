@@ -1,6 +1,8 @@
 package net.alephnull05.wheeloftimemc;
 
 import com.mojang.logging.LogUtils;
+import net.alephnull05.wheeloftimemc.block.ModBlocks;
+import net.alephnull05.wheeloftimemc.item.ModCreativeModeTabs;
 import net.alephnull05.wheeloftimemc.item.ModItems;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
@@ -21,15 +23,16 @@ import org.slf4j.Logger;
 @Mod(net.alephnull05.wheeloftimemc.WheelOfTimeMC.MOD_ID)
 public class WheelOfTimeMC
 {
-    // Define mod id in a common place for everything to reference
     public static final String MOD_ID = "wheeloftimemc";
-    // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
     public WheelOfTimeMC()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        ModCreativeModeTabs.register(modEventBus);
+
         ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
@@ -45,9 +48,6 @@ public class WheelOfTimeMC
 
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
-            if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-                event.accept(ModItems.BRONZE);
-            }
     }
 
     @SubscribeEvent

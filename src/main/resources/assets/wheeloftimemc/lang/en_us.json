@@ -1,3 +1,9 @@
 {
-  "item.wheeloftimemc.bronze": "Bronze"
+  "item.wheeloftimemc.bronze": "Bronze",
+  "item.wheeloftimemc.cuendillar_shard": "Cuendillar Shard",
+
+  "block.wheeloftimemc.bronze_ore": "Bronze Ore",
+  "block.wheeloftimemc.cuendillar_block": "Block of Cuendillar",
+
+  "creativetab.wheel_of_time_materials": "Wheel Of Time Materials"
 }
