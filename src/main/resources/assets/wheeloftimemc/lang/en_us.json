@@ -7,5 +7,12 @@
   "block.wheeloftimemc.tin_block": "Block of Tin",
   "block.wheeloftimemc.cuendillar_block": "Block of Cuendillar",
 
-  "creativetab.wheel_of_time_materials": "Wheel Of Time Materials"
+  "creativetab.wheel_of_time_materials": "Wheel Of Time Materials",
+
+  "key.category.wheeloftimemc.wheeloftime": "Wheel Of Time",
+  "key.wheeloftimemc.fire": "Weave Fire",
+  "key.wheeloftimemc.earth": "Weave Earth",
+  "key.wheeloftimemc.air": "Weave Air",
+  "key.wheeloftimemc.water": "Weave Water",
+  "key.wheeloftimemc.spirit": "Weave Spirit"
 }

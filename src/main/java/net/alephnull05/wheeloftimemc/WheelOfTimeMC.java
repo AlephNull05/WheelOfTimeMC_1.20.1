@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.alephnull05.wheeloftimemc.block.ModBlocks;
 import net.alephnull05.wheeloftimemc.item.ModCreativeModeTabs;
 import net.alephnull05.wheeloftimemc.item.ModItems;
+import net.alephnull05.wheeloftimemc.networking.ModMessages;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -42,8 +43,8 @@ public class WheelOfTimeMC
 
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event)
-    {
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        ModMessages.register();
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event)
