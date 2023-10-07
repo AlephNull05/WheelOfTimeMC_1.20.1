@@ -49,7 +49,9 @@ public class ModEvents {
             event.player.getCapability(PlayerMagicProvider.PLAYER_MAGIC).ifPresent(magic -> {
                 if(magic.getMagicLevel() < 100 && event.player.getRandom().nextFloat() < 0.005f) { // Once Every 10 Seconds on Avg
                     magic.addMagic(10);
-                    event.player.sendSystemMessage(Component.literal("Magic Regenerated"));
+                    if(magic.getMagicLevel()==100) {
+                        event.player.sendSystemMessage(Component.literal("Magic Full"));
+                    }
                 }
             });
         }

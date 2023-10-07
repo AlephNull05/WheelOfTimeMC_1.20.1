@@ -29,7 +29,7 @@ public class PlayerMagicProvider implements ICapabilityProvider, INBTSerializabl
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if(cap == PLAYER_MAGIC) {
-            optional.cast();
+            return optional.cast();
         }
 
         return LazyOptional.empty();

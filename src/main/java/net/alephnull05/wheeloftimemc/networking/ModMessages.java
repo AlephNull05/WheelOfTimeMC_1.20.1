@@ -1,8 +1,10 @@
 package net.alephnull05.wheeloftimemc.networking;
 
 import net.alephnull05.wheeloftimemc.WheelOfTimeMC;
-import net.alephnull05.wheeloftimemc.networking.packet.ExampleC2SPacket;
+import net.alephnull05.wheeloftimemc.networking.packet.WeavingAirC2SPacket;
+import net.alephnull05.wheeloftimemc.networking.packet.WeavingEarthC2SPacket;
 import net.alephnull05.wheeloftimemc.networking.packet.WeavingFireC2SPacket;
+import net.alephnull05.wheeloftimemc.networking.packet.WeavingWaterC2SPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -27,16 +29,25 @@ public class ModMessages {
                 .simpleChannel();
 
         INSTANCE = net;
-
-        net.messageBuilder(ExampleC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(ExampleC2SPacket::new)
-                .encoder(ExampleC2SPacket::toBytes)
-                .consumerMainThread(ExampleC2SPacket::handle)
-                .add();
         net.messageBuilder(WeavingFireC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
                 .decoder(WeavingFireC2SPacket::new)
                 .encoder(WeavingFireC2SPacket::toBytes)
                 .consumerMainThread(WeavingFireC2SPacket::handle)
+                .add();
+        net.messageBuilder(WeavingEarthC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(WeavingEarthC2SPacket::new)
+                .encoder(WeavingEarthC2SPacket::toBytes)
+                .consumerMainThread(WeavingEarthC2SPacket::handle)
+                .add();
+        net.messageBuilder(WeavingWaterC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(WeavingWaterC2SPacket::new)
+                .encoder(WeavingWaterC2SPacket::toBytes)
+                .consumerMainThread(WeavingWaterC2SPacket::handle)
+                .add();
+        net.messageBuilder(WeavingAirC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(WeavingAirC2SPacket::new)
+                .encoder(WeavingAirC2SPacket::toBytes)
+                .consumerMainThread(WeavingAirC2SPacket::handle)
                 .add();
     }
 
