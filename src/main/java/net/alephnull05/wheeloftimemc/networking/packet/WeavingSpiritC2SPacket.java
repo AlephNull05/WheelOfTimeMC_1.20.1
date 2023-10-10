@@ -11,16 +11,15 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraftforge.network.NetworkEvent;
 
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 
-public class WeavingWaterC2SPacket {
+public class WeavingSpiritC2SPacket {
 
-    public WeavingWaterC2SPacket() {
+    public WeavingSpiritC2SPacket() {
 
     }
 
-    public WeavingWaterC2SPacket(FriendlyByteBuf buf) {
+    public WeavingSpiritC2SPacket(FriendlyByteBuf buf) {
 
     }
 
@@ -34,30 +33,24 @@ public class WeavingWaterC2SPacket {
             //ON THE SERVER
             ServerPlayer player = context.getSender();
             ServerLevel level = player.serverLevel();
-            AtomicBoolean check = new AtomicBoolean(false);
 
             //decrease magic level
             player.getCapability(PlayerMagicProvider.PLAYER_MAGIC).ifPresent(magic -> {
                 if (magic.getMagicLevel() > 0) {
                     magic.subMagic(1);
 
-                    check.set(true);
-
-                    player.sendSystemMessage(Component.literal("Magic Level: " + magic.getMagicLevel()).withStyle(ChatFormatting.BLUE),true);
+                    player.sendSystemMessage(Component.literal("Magic Level: " + magic.getMagicLevel()).withStyle(ChatFormatting.GOLD),true);
 
                     //add to combo
-
+                    player.getCapability(ComboTrackerProvider.CURRENT_COMBO).ifPresent(currentCombo -> {
+                        currentCombo.addThread(5);
+                    });
                 } else {
-                    player.sendSystemMessage(Component.literal("Out of Magic").withStyle(ChatFormatting.ITALIC));
+                    player.sendSystemMessage(Component.literal("Out of Magic").withStyle(ChatFormatting.ITALIC), true);
                 }
             });
 
-            player.getCapability(ComboTrackerProvider.CURRENT_COMBO).ifPresent(currentCombo -> {
-                currentCombo.addThread(3);
-                player.sendSystemMessage(Component.literal("Combo: " + currentCombo.getCurrentCombo().toString()));
-            });
-
-            level.playSound(null, player.getOnPos(), SoundEvents.WATER_AMBIENT, SoundSource.PLAYERS, 0.75F, level.random.nextFloat()*0.1F+0.9F);
+            level.playSound(null, player.getOnPos(), SoundEvents.BEACON_AMBIENT, SoundSource.PLAYERS, 0.75F, level.random.nextFloat()*0.1F+0.9F);
 
         });
         return true;

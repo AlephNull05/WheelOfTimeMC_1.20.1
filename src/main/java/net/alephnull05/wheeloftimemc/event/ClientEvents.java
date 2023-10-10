@@ -1,13 +1,10 @@
 package net.alephnull05.wheeloftimemc.event;
 
 import net.alephnull05.wheeloftimemc.WheelOfTimeMC;
-import net.alephnull05.wheeloftimemc.client.MagicHudOverlay;
 import net.alephnull05.wheeloftimemc.networking.ModMessages;
-import net.alephnull05.wheeloftimemc.networking.packet.WeavingAirC2SPacket;
-import net.alephnull05.wheeloftimemc.networking.packet.WeavingEarthC2SPacket;
-import net.alephnull05.wheeloftimemc.networking.packet.WeavingFireC2SPacket;
-import net.alephnull05.wheeloftimemc.networking.packet.WeavingWaterC2SPacket;
+import net.alephnull05.wheeloftimemc.networking.packet.*;
 import net.alephnull05.wheeloftimemc.util.KeyBinding;
+import net.alephnull05.wheeloftimemc.weaving.ComboTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
@@ -41,7 +38,11 @@ public class ClientEvents {
             }
             //weave spirit
             if(KeyBinding.SPIRIT_KEY.consumeClick()) {
-                Minecraft.getInstance().player.sendSystemMessage(Component.literal("Weaving Spirit"));
+                ModMessages.sendToServer(new WeavingSpiritC2SPacket());
+            }
+            //use weave
+            if (KeyBinding.WEAVE_KEY.consumeClick()) {
+                ModMessages.sendToServer(new WeavingC2SPacket());
             }
         }
     }
@@ -55,10 +56,10 @@ public class ClientEvents {
             event.register(KeyBinding.AIR_KEY);
             event.register(KeyBinding.WATER_KEY);
             event.register(KeyBinding.SPIRIT_KEY);
+            event.register(KeyBinding.WEAVE_KEY);
         }
         @SubscribeEvent
         public static void registerGuiOverlays(RegisterGuiOverlaysEvent event) {
-            event.registerAboveAll("thirst", MagicHudOverlay.HUD_MAGIC);
         }
     }
 }

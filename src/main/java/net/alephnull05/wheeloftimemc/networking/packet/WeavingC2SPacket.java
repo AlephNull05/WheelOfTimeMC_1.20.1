@@ -1,6 +1,5 @@
 package net.alephnull05.wheeloftimemc.networking.packet;
 
-import net.alephnull05.wheeloftimemc.weaving.ComboTracker;
 import net.alephnull05.wheeloftimemc.weaving.ComboTrackerProvider;
 import net.alephnull05.wheeloftimemc.weaving.PlayerMagicProvider;
 import net.minecraft.ChatFormatting;
@@ -12,15 +11,18 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraftforge.network.NetworkEvent;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
-public class WeavingAirC2SPacket {
+public class WeavingC2SPacket {
 
-    public WeavingAirC2SPacket() {
+    public WeavingC2SPacket() {
 
     }
 
-    public WeavingAirC2SPacket(FriendlyByteBuf buf) {
+    public WeavingC2SPacket(FriendlyByteBuf buf) {
 
     }
 
@@ -34,24 +36,18 @@ public class WeavingAirC2SPacket {
             //ON THE SERVER
             ServerPlayer player = context.getSender();
             ServerLevel level = player.serverLevel();
+            //1=fire 2=earth 3=water 4=air 5=spirit
+            final int[] FIREBALL_COMBO = {1,5};
+            List<Integer> FIREBALL = Arrays.stream(FIREBALL_COMBO).boxed().toList();
 
-            //decrease magic level
-            player.getCapability(PlayerMagicProvider.PLAYER_MAGIC).ifPresent(magic -> {
-                if (magic.getMagicLevel() > 0) {
-                    magic.subMagic(1);
-
-                    player.sendSystemMessage(Component.literal("Magic Level: " + magic.getMagicLevel()).withStyle(ChatFormatting.WHITE),true);
-
-                    //add to combo
-                    player.getCapability(ComboTrackerProvider.CURRENT_COMBO).ifPresent(currentCombo -> {
-                        currentCombo.addThread(4);
-                    });
+            player.getCapability(ComboTrackerProvider.CURRENT_COMBO).ifPresent(currentCombo -> {
+                if (currentCombo.getCurrentCombo()==FIREBALL) {
+                    player.sendSystemMessage(Component.literal("Casting Fireball").withStyle(ChatFormatting.RED),true);
                 } else {
-                    player.sendSystemMessage(Component.literal("Out of Magic").withStyle(ChatFormatting.ITALIC), true);
+                    player.sendSystemMessage(Component.literal("Wrong Combo"));
                 }
+                currentCombo.clearThread();
             });
-
-            level.playSound(null, player.getOnPos(), SoundEvents.PHANTOM_AMBIENT, SoundSource.PLAYERS, 0.75F, level.random.nextFloat()*0.1F+0.9F);
 
         });
         return true;

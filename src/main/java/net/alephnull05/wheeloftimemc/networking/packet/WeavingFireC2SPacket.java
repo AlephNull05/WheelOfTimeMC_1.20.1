@@ -1,5 +1,6 @@
 package net.alephnull05.wheeloftimemc.networking.packet;
 
+import net.alephnull05.wheeloftimemc.weaving.ComboTrackerProvider;
 import net.alephnull05.wheeloftimemc.weaving.PlayerMagic;
 import net.alephnull05.wheeloftimemc.weaving.PlayerMagicProvider;
 import net.minecraft.ChatFormatting;
@@ -43,6 +44,9 @@ public class WeavingFireC2SPacket {
                     player.sendSystemMessage(Component.literal("Magic Level: " + magic.getMagicLevel()).withStyle(ChatFormatting.RED),true);
 
                     //add to combo
+                    player.getCapability(ComboTrackerProvider.CURRENT_COMBO).ifPresent(currentCombo -> {
+                        currentCombo.addThread(1);
+                    });
                 } else {
                     player.sendSystemMessage(Component.literal("Out of Magic").withStyle(ChatFormatting.ITALIC), true);
                 }

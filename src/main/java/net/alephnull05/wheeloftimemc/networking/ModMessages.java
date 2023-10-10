@@ -1,10 +1,7 @@
 package net.alephnull05.wheeloftimemc.networking;
 
 import net.alephnull05.wheeloftimemc.WheelOfTimeMC;
-import net.alephnull05.wheeloftimemc.networking.packet.WeavingAirC2SPacket;
-import net.alephnull05.wheeloftimemc.networking.packet.WeavingEarthC2SPacket;
-import net.alephnull05.wheeloftimemc.networking.packet.WeavingFireC2SPacket;
-import net.alephnull05.wheeloftimemc.networking.packet.WeavingWaterC2SPacket;
+import net.alephnull05.wheeloftimemc.networking.packet.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -48,6 +45,16 @@ public class ModMessages {
                 .decoder(WeavingAirC2SPacket::new)
                 .encoder(WeavingAirC2SPacket::toBytes)
                 .consumerMainThread(WeavingAirC2SPacket::handle)
+                .add();
+        net.messageBuilder(WeavingSpiritC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(WeavingSpiritC2SPacket::new)
+                .encoder(WeavingSpiritC2SPacket::toBytes)
+                .consumerMainThread(WeavingSpiritC2SPacket::handle)
+                .add();
+        net.messageBuilder(WeavingC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(WeavingC2SPacket::new)
+                .encoder(WeavingC2SPacket::toBytes)
+                .consumerMainThread(WeavingC2SPacket::handle)
                 .add();
     }
 
