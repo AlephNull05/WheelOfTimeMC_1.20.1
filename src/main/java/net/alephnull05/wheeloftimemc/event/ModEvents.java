@@ -1,6 +1,8 @@
 package net.alephnull05.wheeloftimemc.event;
 
 import net.alephnull05.wheeloftimemc.WheelOfTimeMC;
+import net.alephnull05.wheeloftimemc.weaving.ComboTracker;
+import net.alephnull05.wheeloftimemc.weaving.ComboTrackerProvider;
 import net.alephnull05.wheeloftimemc.weaving.PlayerMagic;
 import net.alephnull05.wheeloftimemc.weaving.PlayerMagicProvider;
 import net.minecraft.network.chat.Component;
@@ -24,6 +26,9 @@ public class ModEvents {
             if(!event.getObject().getCapability(PlayerMagicProvider.PLAYER_MAGIC).isPresent()) {
                 event.addCapability(new ResourceLocation(WheelOfTimeMC.MOD_ID, "properties"), new PlayerMagicProvider());
             }
+            if(!event.getObject().getCapability(ComboTrackerProvider.CURRENT_COMBO).isPresent()) {
+                event.addCapability(new ResourceLocation(WheelOfTimeMC.MOD_ID, "properties"), new ComboTrackerProvider());
+            }
         }
     }
 
@@ -35,12 +40,18 @@ public class ModEvents {
                     newStore.copyFrom(oldStore);
                 });
             });
+            event.getOriginal().getCapability(ComboTrackerProvider.CURRENT_COMBO).ifPresent(oldStore -> {
+                event.getOriginal().getCapability(ComboTrackerProvider.CURRENT_COMBO).ifPresent(newStore -> {
+                    newStore.copyFrom(oldStore);
+                });
+            });
         }
     }
 
     @SubscribeEvent
     public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
         event.register(PlayerMagic.class);
+        event.register(ComboTracker.class);
     }
 
     @SubscribeEvent

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ComboTracker {
-    private static List<Integer> currentCombo = new ArrayList<>();
+    private List<Integer> currentCombo = new ArrayList<>();
 
     public List<Integer> getCurrentCombo() {
         return currentCombo;
